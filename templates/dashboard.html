@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HelioCast | Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; padding: 40px; }
+        .plot-img { max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #dee2e6; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-primary border-bottom pb-2 mb-4">HelioCast Model Diagnostics</h1>
+        
+        <div class="row mb-5">
+            <div class="col-md-6">
+                <div class="card p-3 shadow-sm">
+                    <h4 class="card-title">Performance Metrics</h4>
+                    <ul class="list-group list-group-flush mt-3">
+                        <li class="list-group-item"><strong>Primary Model:</strong> {{ metrics.Model_Type }}</li>
+                        <li class="list-group-item"><strong>R² Score (Test):</strong> {{ metrics.R2 }}</li>
+                        <li class="list-group-item"><strong>RMSE:</strong> {{ metrics.RMSE }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="mb-3">Parity Plots (Actual vs. Predicted)</h3>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card p-2 shadow-sm text-center">
+                    <h5>Manual Ridge Regression</h5>
+                    <img src="{{ url_for('static', filename='../plots/parity_ridge_manual.png') }}" alt="Ridge Parity Plot" class="plot-img">
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card p-2 shadow-sm text-center">
+                    <h5>XGBoost Regressor</h5>
+                    <img src="{{ url_for('static', filename='../plots/parity_xgb.png') }}" alt="XGBoost Parity Plot" class="plot-img">
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <a href="/" class="btn btn-secondary">Back to Forecasting</a>
+        </div>
+    </div>
+</body>
+</html>
